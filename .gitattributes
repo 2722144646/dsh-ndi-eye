@@ -1,0 +1,10 @@
+# Normalise line endings on checkout and commit so the repo stays LF on every
+# platform. Without this, Windows checkout rewrites files to CRLF and produces
+# spurious diffs for anyone on macOS/Linux.
+* text=auto eol=lf
+
+# Binary files: never touch.
+*.png binary
+*.jpg binary
+*.webp binary
+*.tgz binary

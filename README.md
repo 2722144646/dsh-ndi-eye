@@ -17,13 +17,23 @@
 
 ## 安装
 
+**第 1 步 · 先加白名单**（顺序很重要，反了首次安装会失败）
+
+编辑 `<profile 目录>/pnpm-workspace.yaml`：
+
+```yaml
+allowBuilds:
+  koffi: true
+  dsh-ndi-eye: true
+```
+
+**第 2 步 · 安装**
+
 ```powershell
 dsh plugin --profile <你的 profile> add github:2722144646/dsh-ndi-eye
 ```
 
-然后重启 DSH。
-
-**装完必须确认 bundle 已登记**，否则包装上了、工具却不出现：
+**第 3 步 · 确认 bundle 已登记**，否则包装上了、工具却不出现：
 
 ```powershell
 dsh --profile <你的 profile> --dump-config | Select-String ndi-eye
@@ -42,24 +52,30 @@ dsh --profile <你的 profile> --dump-config | Select-String ndi-eye
 > `dsh plugin add` 只是把参数转发给 pnpm，它**只写 `dependencies`，不写 `dsh.profile.bundles`**。
 > 实测在全新 profile 上只执行 `add`：依赖里有 `dsh-ndi-eye`，但 bundles 里只有 `dsh-base` —— patch 没被挂载。
 
-### 如果安装报 `ERR_PNPM_IGNORED_BUILDS`
+### 安装报 `ERR_PNPM_IGNORED_BUILDS` 时
 
 在 `<profile 目录>/pnpm-workspace.yaml` 里加白名单，然后重装：
 
 ```yaml
 allowBuilds:
   koffi: true
+  dsh-ndi-eye: true
 ```
 
-pnpm 默认不执行依赖的构建脚本。不加白名单会以 `exit code 1` 结束，DSH 报成 `kind: build-blocked`。
+这里有两个键，别只加一个：
 
-**这只是噪音，不是故障**：koffi 的预编译 addon 本身可用，即使脚本被忽略插件也照常工作。但别人看到 `exit 1` 容易以为装坏了，加白名单能彻底消掉。
+- `koffi` —— 它是原生依赖，有自己的安装脚本。
+- `dsh-ndi-eye` —— **从 GitHub 安装时必须要**。托管在 git 仓库上的插件，pnpm 会用 `prepare` 脚本构建它；不加这个键，安装会被挡下。报错里 pnpm 会打印出需要的准确键名，照抄即可。
 
-两种写法都行：`koffi: true`（不限版本），或 `koffi@3.3.4: true`（钉版本）。安装器有时会自己写一行占位 `set this to true or false`，改成 `true` 即可。
+pnpm 默认不执行这类脚本，不加白名单会以 `exit code 1` 结束，DSH 报成 `kind: build-blocked`。
+
+**对 koffi 来说这只是噪音**：它的预编译 addon 本身可用，脚本被忽略插件也照常工作。但别人看到 `exit 1` 容易以为装坏了，而且 `dsh-ndi-eye` 这个键不加是真的装不上，所以白名单要加。
+
+也可以写钉版本的 `koffi@3.3.4: true`。安装器有时会自己写一行占位 `set this to true or false`，改成 `true` 即可。
 
 ### 其他安装方式
 
-**压缩包**（不走 GitHub 时）：`npm pack` 后把 `.tgz` 给对方，`dsh plugin --profile <p> add "<tgz 绝对路径>"`。同样要加白名单、登记 bundle。
+**压缩包**（不走 GitHub 时）：`npm pack` 后把 `.tgz` 给对方，`dsh plugin --profile <p> add "<tgz 绝对路径>"`。压缩包没有 `prepare` 脚本，只需 `koffi: true`；同样要登记 bundle。
 
 **本地开发**：`dsh plugin --profile <p> add "link:<本目录绝对路径>"`。
 

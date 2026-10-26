@@ -18,7 +18,7 @@
 ## 安装
 
 ```powershell
-dsh plugin --profile <你的 profile> add github:<owner>/dsh-ndi-eye
+dsh plugin --profile <你的 profile> add github:2722144646/dsh-ndi-eye
 ```
 
 然后重启 DSH。

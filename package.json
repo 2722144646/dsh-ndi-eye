@@ -23,11 +23,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/<owner>/dsh-ndi-eye.git"
+    "url": "git+https://github.com/2722144646/dsh-ndi-eye.git"
   },
-  "homepage": "https://github.com/<owner>/dsh-ndi-eye#readme",
+  "homepage": "https://github.com/2722144646/dsh-ndi-eye#readme",
   "bugs": {
-    "url": "https://github.com/<owner>/dsh-ndi-eye/issues"
+    "url": "https://github.com/2722144646/dsh-ndi-eye/issues"
   },
   "dependencies": {
     "koffi": "^3.3.4"

@@ -1,0 +1,62 @@
+{
+  "name": "dsh-ndi-eye",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "让 AI 用 NDI 当眼睛：把任何 NDI 源（Live2D 相机输出、OBS 节目画面、局域网里另一台机器）变成可看到的画面，且不受窗口遮挡或最小化影响。",
+  "main": "./lib/index.js",
+  "icon": "./icon.svg",
+  "exports": {
+    ".": "./lib/index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "locale/*.json",
+    "icon.svg",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE",
+    "test"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/<owner>/dsh-ndi-eye.git"
+  },
+  "homepage": "https://github.com/<owner>/dsh-ndi-eye#readme",
+  "bugs": {
+    "url": "https://github.com/<owner>/dsh-ndi-eye/issues"
+  },
+  "dependencies": {
+    "koffi": "^3.3.4"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "test": "node test/selftest.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "os": [
+    "win32"
+  ],
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "dsh-plugin",
+    "ndi",
+    "vision",
+    "eye",
+    "live2d",
+    "obs",
+    "vtuber"
+  ],
+  "author": "",
+  "license": "MIT"
+}

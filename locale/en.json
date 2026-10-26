@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "NDI Eye",
+    "description": "Gives the agent an NDI eye: any NDI source (Live2D camera output, OBS program feed, capture card, a machine across the LAN) becomes an image it can see, even when the window is hidden or minimised."
+  }
+}

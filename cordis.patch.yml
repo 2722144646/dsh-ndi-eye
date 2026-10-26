@@ -1,0 +1,15 @@
+# dsh-ndi-eye —— 用 NDI 当眼睛
+#
+# 一个普通 cordis 插件行：注册 ndi_sources / ndi_see / ndi_watch / ndi_status
+# 四个工具，把任意 NDI 源的画面通过 harness 附件服务送进模型的视觉通道。
+#
+# 工具名用 `ndi_` 前缀：同一个 profile 里已经有 screen_*（屏幕截图）和
+# vtuber_*（Live2D 身体），重名会互相遮蔽。
+- insert:
+    - id: ndi-eye
+      name: dsh-ndi-eye
+      config:
+        libraryPath: ''
+        preferredSource: ''
+        maxWidth: 1280
+        announce: true

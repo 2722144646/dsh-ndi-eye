@@ -1,0 +1,18 @@
+# Dependencies: installed by pnpm/npm on the user's machine, never committed.
+node_modules/
+
+# Build output: the packed tarball is produced by `npm pack`, not tracked.
+dist/
+*.tgz
+
+# Local test artifacts (the self-test writes this next to itself)
+ndi-eye-synthetic.png
+
+# Editor / OS noise
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

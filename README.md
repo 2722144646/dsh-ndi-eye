@@ -123,7 +123,7 @@ node test/selftest.mjs
 - **`stop()` 里先清 `this.worker` 再发命令**是个陷阱：`request()` 见 worker 为 null 立即拒绝，quit 从没发出去，最后变成强杀正在接收的线程。必须直接 `postMessage`。
 - **建接收器后要 2–4 秒才出首帧**。不等就会把这段算进延迟，看起来像「插件很慢」。现在 `connect` 只在**真有像素到了**才返回成功。
 - **`bandwidth: lowest` 收不到任何帧**，必须用 `highest`(0)。
-- **源名会被加上主机名前缀**：注册 `DSH NDI Test Pattern`，被发现成 `BLOODPEACH (DSH NDI Test Pattern)`。
+- **源名会被加上主机名前缀**：注册 `DSH NDI Test Pattern`，被发现成 `xxxxxx (DSH NDI Test Pattern)`。
 - **FourCC 是小端整数**：BGRA 字段值是 `0x41524742`（字节拼出 B,G,R,A），写成 `0x42475241` 发不出帧。
 - **fps 不能太早算**。连接爬坡期读数偏低（同一源先读 21.5、稳定后 30.0），现在要求统计窗口至少跨 1 秒。
 - **harness 的 schema 校验不接受 `type` 数组**。可空字段写成可选键（值不存在就不输出），不要写 `type: ['string','null']`，否则插件激活时报 `JsonSchemaError`。
